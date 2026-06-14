@@ -37,6 +37,7 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
+        docker buildx create --name mybuilder --driver docker-container --bootstrap --use
         docker buildx build --platform linux/amd64,linux/arm64 -t grizzlylearning161/docker-graphql:$NEW_VERSION -t grizzlylearning161/docker-graphql:latest . --push
     #    docker build -t grizzlylearning161/docker-graphql:$NEW_VERSION .
     #    docker build -t grizzlylearning161/docker-graphql:latest .
